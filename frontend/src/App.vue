@@ -1,6 +1,6 @@
 <script setup>
-import ButtonLink from "@/lib/ButtonLink.vue";
 import TheQuestionInput from "@/components/TheQuestionInput.vue";
+import TheSuggestions from "./components/TheSuggestions.vue";
 </script>
 
 <template>
@@ -11,6 +11,7 @@ import TheQuestionInput from "@/components/TheQuestionInput.vue";
         <h2>Powered by COLTS</h2>
       </div>
       <TheQuestionInput></TheQuestionInput>
+      <TheSuggestions></TheSuggestions>
     </div>
   </main>
 </template>

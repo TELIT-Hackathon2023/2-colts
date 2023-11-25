@@ -56,10 +56,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/styles/abstracts.scss";
+section {
+  margin-bottom: 3.6rem;
+}
 .container {
   .input {
     &__field {
-      background-color: #262626;
+      background-color: $grey;
       padding: 0.6rem 0.6rem 0.6rem 2rem;
 
       display: grid;
