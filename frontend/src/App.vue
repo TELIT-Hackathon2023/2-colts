@@ -1,4 +1,5 @@
 <script setup>
+import ButtonLink from "@/lib/ButtonLink.vue";
 import TheQuestionInput from "@/components/TheQuestionInput.vue";
 import TheSuggestions from "@/components/TheSuggestions.vue";
 import TheUserTypeSelection from "@/components/TheUserTypeSelection.vue";
@@ -39,29 +40,6 @@ body {
   color: $body-color;
 }
 
-main {
-  min-height: 100vh;
-  @include center-content;
-}
-
-.title {
-  text-align: center;
-  padding-bottom: 5.6rem;
-
-  h1 {
-    font-size: 5.6rem;
-    letter-spacing: 2px;
-    font-family: "SfPro-B", sans-serif;
-    line-height: 1.2;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    font-family: "SfPro-M", sans-serif;
-    color: $light-grey;
-  }
-}
 .container {
   padding: 0 2.4rem;
   width: clamp(50rem, 90rem, 100rem);

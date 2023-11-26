@@ -1,16 +1,16 @@
 <script setup>
-import ButtonLink from "@/lib/ButtonLink.vue";
+import ButtonLink from "../lib/ButtonLink.vue";
 import axios from "axios";
 </script>
 <template>
   <section>
-    <div class="input__field">
+    <div class="container">
       <input
         type="text"
         v-model="inputText"
         placeholder="Write your question "
       />
-      <ButtonLink @click="getAnswer" :type="'secondary'"
+      <ButtonLink @click="getAnswer"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -41,12 +41,8 @@ export default {
     async getAnswer() {
       // axios request
       try {
-        const response = await axios.get("http://localhost:8080/test", {
-          params: {
-            data: this.inputText,
-          },
-        });
-        console.log(response.data);
+        const response = await axios.get("http://localhost:8080/test");
+        console.log(response);
       } catch (error) {
         console.error(error);
       }
@@ -60,30 +56,24 @@ section {
   margin-bottom: 4.2rem;
 }
 .container {
-  .input {
-    &__field {
-      background-color: $grey;
-      padding: 0.6rem 0.6rem 0.6rem 2rem;
+  background-color: rgb(64, 64, 64);
+  padding: 0.6rem 0.6rem 0.6rem 2rem;
 
-      display: grid;
-      grid-template-columns: 1fr auto;
-      border-radius: 0.8rem;
-      gap: 1.6rem;
-    }
-  }
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-radius: 0.8rem;
+  gap: 1.6rem;
+}
 
-  input {
-    font-size: 1.8rem;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    width: 100%;
-    color: $white;
-  }
-  .icon {
-    height: 2.4rem;
-    width: 2.4rem;
-  }
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+.icon {
+  height: 2rem;
+  width: 2rem;
 }
 
 ::placeholder {

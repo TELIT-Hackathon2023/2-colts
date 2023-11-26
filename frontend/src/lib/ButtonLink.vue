@@ -114,19 +114,18 @@ export default {
 
 .primary {
   color: white;
-  background-color: $pink;
-  border: 2px solid $pink;
+  background-color: $blue;
+  border: 2px solid $blue;
 
-  &:hover,
-  &:focus-within {
-    color: $pink;
-    background-color: transparent;
+  &:hover {
+    color: $blue;
+    background-color: white;
   }
 }
 
 .secondary {
-  color: $pink;
-  background-color: transparent;
+  color: $blue;
+  background-color: rgb(227, 227, 227);
 
   &.medium {
     padding: 0.8rem 1.6rem;
@@ -140,14 +139,13 @@ export default {
     padding: 1.2rem 2.4rem;
   }
 
-  &:hover,
-  &:focus {
-    background-color: $light-grey;
-    border-color: $light-grey;
+  &:hover {
+    background-color: white;
+    border-color: white;
   }
 }
 
 .tertiary {
-  color: white;
+  color: pink;
 }
 </style>
