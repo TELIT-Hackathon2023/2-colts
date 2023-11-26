@@ -14,6 +14,16 @@ app.get("/api", async (req, res) => {
   let dueDate = req.query.dueDate;
   let attachments = req.query.attachments;
 
+  console.log(
+    summary,
+    issueType,
+    priority,
+    description,
+    labels,
+    dueDate,
+    attachments
+  );
+
   try {
     const options = {
       method: "POST",
