@@ -2,10 +2,18 @@
 import TheQuestionInput from "@/components/TheQuestionInput.vue";
 import TheSuggestions from "@/components/TheSuggestions.vue";
 import TheUserTypeSelection from "@/components/TheUserTypeSelection.vue";
+import JiraPopup from "@/lib/JiraTicketPopup.vue";
+import axios from "axios";
 import { store } from "@/states";
 </script>
 
 <template>
+  <JiraPopup
+    @closePopup="isPopupVisible = false"
+    popupTitle="New Jira Ticket"
+    popupSubtitle="Check the information below to create a new ticket in [name of the JIRA]"
+    v-if="isPopupVisible"
+  ></JiraPopup>
   <main>
     <div class="container">
       <div class="title">
@@ -13,8 +21,13 @@ import { store } from "@/states";
         <h2>Powered by COLTS</h2>
       </div>
       <TheUserTypeSelection></TheUserTypeSelection>
-      <TheQuestionInput></TheQuestionInput>
-      <TheSuggestions></TheSuggestions>
+      <TheQuestionInput
+        @questionSubmitted="(e) => getAnswer(e)"
+        :isResponseLoading="isResponseLeading"
+      ></TheQuestionInput>
+      <TheSuggestions
+        @suggestedPromptSubmitted="(e) => getAnswer(e)"
+      ></TheSuggestions>
     </div>
   </main>
 </template>
@@ -24,7 +37,28 @@ export default {
   data() {
     return {
       selectedRole: "beginner",
+      isPopupVisible: true,
+
+      isResponseLeading: false,
     };
+  },
+
+  methods: {
+    async getAnswer(prompt) {
+      this.isResponseLeading = true;
+      // axios request
+      try {
+        const response = await axios.get("http://localhost:8080/test", {
+          params: {
+            data: prompt,
+          },
+        });
+        console.log(response.data);
+        this.isResponseLeading = false;
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -64,7 +98,7 @@ main {
 }
 .container {
   padding: 0 2.4rem;
-  width: clamp(50rem, 90rem, 100rem);
+  width: clamp(45rem, 90rem, 100rem);
   margin: 0 auto;
 }
 </style>
