@@ -51,6 +51,9 @@ export default {
         const response = await axios.get("http://localhost:8080/test", {
           params: {
             data: prompt,
+            persona: ["beginner", "developer", "business analyst"].indexOf(
+              store.selectedRole
+            ),
           },
         });
         console.log(response.data);
