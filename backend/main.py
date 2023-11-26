@@ -55,6 +55,15 @@ def endpoint():
 def test():
     try:
         data = request.args.get('data')
+        data += " Explain this to a "
+        persona = request.args.get('persona')
+        def switch(persona):
+            if persona == 0:
+                data += "beginner"
+            elif persona == 1:
+                data += "developer"
+            elif persona == 2:
+                data += "business analyst"
         print("request arguments: ", data)
         if data:
             response = chain({"question": data, "chat_history": chat_history})
