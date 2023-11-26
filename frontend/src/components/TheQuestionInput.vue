@@ -56,9 +56,16 @@ export default {
       inputText: "",
     };
   },
+
+  methods: {
+    submitQuestion() {
+      this.$emit("questionSubmitted", inputText);
+    },
+  },
   props: {
     isResponseLoading: Boolean,
   },
+  emits: ["questionSubmitted"],
 };
 </script>
 <style lang="scss" scoped>

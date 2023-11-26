@@ -55,6 +55,7 @@ def endpoint():
 def test():
     try:
         data = request.args.get('data')
+        initial = data
         data += " Explain this to a "
         persona = request.args.get('persona')
         print("persona", persona)
@@ -70,6 +71,7 @@ def test():
             response = chain({"question": data, "chat_history": chat_history})
             if response:
                 print("AI response: ", response)
+                response={**response, 'initial': initial}
                 chat_history.append((data, response['answer']))
                 data = None
                 return jsonify({'status': 'success', 'data': response}), 200

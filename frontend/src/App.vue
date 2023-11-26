@@ -3,6 +3,7 @@ import TheQuestionInput from "@/components/TheQuestionInput.vue";
 import TheSuggestions from "@/components/TheSuggestions.vue";
 import TheUserTypeSelection from "@/components/TheUserTypeSelection.vue";
 import JiraPopup from "@/lib/JiraTicketPopup.vue";
+import TheAnswer from "@/components/TheAnswer.vue";
 import axios from "axios";
 import { store } from "@/states";
 </script>
@@ -26,8 +27,10 @@ import { store } from "@/states";
         :isResponseLoading="isResponseLeading"
       ></TheQuestionInput>
       <TheSuggestions
+        v-if="!answer[0]"
         @suggestedPromptSubmitted="(e) => getAnswer(e)"
       ></TheSuggestions>
+      <TheAnswer v-if="answer[0]" :answer="answer"></TheAnswer>
     </div>
   </main>
 </template>
@@ -37,9 +40,10 @@ export default {
   data() {
     return {
       selectedRole: "beginner",
-      isPopupVisible: true,
+      isPopupVisible: false,
 
       isResponseLeading: false,
+      answer: [],
     };
   },
 
@@ -56,8 +60,9 @@ export default {
             ),
           },
         });
-        console.log(response.data);
+        console.log(response.data.data.answer);
         this.isResponseLeading = false;
+        this.answer.unshift(response.data.data);
       } catch (error) {
         console.error(error);
       }
