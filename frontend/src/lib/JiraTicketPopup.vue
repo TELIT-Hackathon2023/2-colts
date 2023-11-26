@@ -7,7 +7,7 @@ import axios from "axios";
   <Popup
     @closePopup="$emit('closePopup')"
     popupTitle="New Jira Ticket"
-    popupSubtitle="Check the information below to create a new ticket in [name of the JIRA]"
+    popupSubtitle='Check the information below to create a new ticket in "Colts2"'
   >
     <form @submit.prevent="submitForm">
       <div>
@@ -17,7 +17,10 @@ import axios from "axios";
       <div class="flexgroup">
         <div>
           <label for="issueType">Issue Type:</label>
-          <input id="issueType" type="text" v-model="issueType" required />
+          <select id="priority" v-model="issueType" required>
+            <option value="1001">Task</option>
+            <option value="1000">Main Task</option>
+          </select>
         </div>
 
         <div>
@@ -46,7 +49,7 @@ import axios from "axios";
         </div>
         <div>
           <label for="dueDate">Due Date:</label>
-          <input type="date" id="dueDate" v-model="dueDate" />
+          <input type="datetime-local" id="dueDate" v-model="dueDate" />
         </div>
       </div>
       <div>
@@ -90,7 +93,17 @@ export default {
     async submitForm() {
       try {
         // Make a GET request to the proxy server
-        const response = await axios.get("http://localhost:3001/api");
+        const response = await axios.get("http://localhost:3001/api", {
+          params: {
+            summary: this.summary,
+            issueType: this.issueType,
+            priority: this.priority,
+            description: this.description,
+            labels: this.labels,
+            dueDate: this.dueDate,
+            attachments: null,
+          },
+        });
 
         console.log(response.data);
         // Handle the response from the external server here
@@ -160,7 +173,7 @@ form {
 
 .flexgroup {
   display: grid;
-  grid-template-columns: 1fr 35%;
+  grid-template-columns: 1fr 1fr;
   gap: 1.6rem;
 }
 

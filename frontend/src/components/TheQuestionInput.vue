@@ -60,6 +60,7 @@ export default {
   methods: {
     submitQuestion() {
       this.$emit("questionSubmitted", inputText);
+      this.inputText = "";
     },
   },
   props: {

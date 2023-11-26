@@ -5,6 +5,15 @@ const app = express();
 const port = 3001;
 
 app.get("/api", async (req, res) => {
+  console.log("moj chlpaty swag");
+  let summary = req.query.summary;
+  let issueType = req.query.issueType;
+  let priority = req.query.priority;
+  let description = req.query.description;
+  let labels = req.query.labels;
+  let dueDate = req.query.dueDate;
+  let attachments = req.query.attachments;
+
   try {
     const options = {
       method: "POST",
@@ -19,13 +28,12 @@ app.get("/api", async (req, res) => {
       data: {
         fields: {
           project: { id: "10000" },
-          issuetype: { id: "10001" },
-          summary: `ml`,
-          customfield_10032: { id: "10020", value: `low` },
-          description: `please`,
-
+          issuetype: { id: `${issueType}` },
+          summary: `${summary}`,
+          customfield_10032: { id: "10020", value: `${priority}` },
+          description: `${description}`,
           reporter: { id: "5e760f2a980acf0c2c352f08" },
-          customfield_10021: [],
+          customfield_10034: [],
         },
         update: {},
         watchers: ["5e760f2a980acf0c2c352f08"],

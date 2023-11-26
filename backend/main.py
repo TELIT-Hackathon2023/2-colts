@@ -56,7 +56,8 @@ def test():
     try:
         data = request.args.get('data')
         initial = data
-        data += " Explain this to a "
+        if data:
+          data += " Explain this to a "
         persona = request.args.get('persona')
         print("persona", persona)
         if persona == "0":
