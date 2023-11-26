@@ -57,7 +57,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/abstracts.scss";
 section {
-  margin-bottom: 3.6rem;
+  margin-bottom: 4.2rem;
 }
 .container {
   .input {
@@ -69,12 +69,6 @@ section {
       grid-template-columns: 1fr auto;
       border-radius: 0.8rem;
       gap: 1.6rem;
-
-      &:focus-within {
-        outline: 2px solid $pink;
-        outline-offset: 4px;
-        // transition: box-shadow 200ms ease-in;
-      }
     }
   }
 
@@ -100,5 +94,12 @@ section {
 ::-ms-input-placeholder {
   /* Edge 12 -18 */
   color: rgba(255, 255, 255, 0.4);
+}
+
+@supports not selector(:focus-visible) {
+  .input__field:focus {
+    outline: 2px solid $pink;
+    outline-offset: 4px;
+  }
 }
 </style>

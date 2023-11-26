@@ -1,3 +1,6 @@
+<script setup>
+import { store } from "@/states.js";
+</script>
 <template>
   <section>
     <div class="suggestions">
@@ -19,14 +22,62 @@
 <script>
 export default {
   name: "TheSuggestions",
-  data() {
-    return {
-      cards: [
-        { title: "1", content: "a" },
-        { title: "2", content: "b" },
-        { title: "3", content: "c" },
-      ],
-    };
+
+  computed: {
+    cards() {
+      switch (store.selectedRole) {
+        case "beginner":
+          return [
+            {
+              title: "TLDR",
+              content: "What is TARDIS? What can I use it for?",
+            },
+            {
+              title: "Getting started",
+              content: "How to onboard my application to Tardis?",
+            },
+            {
+              title: "Limitations",
+              content: "Which limitations does TARDIS have in terms of API’s?",
+            },
+          ];
+          break;
+        case "developer":
+          return [
+            {
+              title: "Exposing an API",
+              content: "How exactly can I create a team in Mission Control?",
+            },
+            {
+              title: "Circuit breaker",
+              content: "Does Tardis provide a circuit breaker functionality?",
+            },
+            {
+              title: "CloudWalker",
+              content:
+                "How can I configure recipient client to expose multiple filetypes?",
+            },
+          ];
+          break;
+        case "business analyst":
+          return [
+            {
+              title: "Exposing an API",
+              content: "How exactly can I create a team in Mission Control?",
+            },
+            {
+              title: "Circuit breaker",
+              content: "Does Tardis provide a circuit breaker functionality?",
+            },
+            {
+              title: "CloudWalker",
+              content:
+                "How can I configure recipient client to expose multiple filetypes?",
+            },
+          ];
+          break;
+      }
+    },
   },
 };
 </script>
@@ -35,13 +86,31 @@ export default {
 
 .suggestions {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: auto auto auto;
   gap: 2.4rem;
 
   &__card {
     background-color: $grey;
     padding: 1.6rem;
     border-radius: $border-radius-small;
+    transition: all 150ms ease-out;
+    &:hover {
+      cursor: pointer;
+      background-color: transparent;
+    }
+
+    h3 {
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      color: rgba(255, 255, 255, 0.6);
+    }
   }
 }
 </style>

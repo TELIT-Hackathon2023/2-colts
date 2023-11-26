@@ -1,6 +1,8 @@
 <script setup>
 import TheQuestionInput from "@/components/TheQuestionInput.vue";
-import TheSuggestions from "./components/TheSuggestions.vue";
+import TheSuggestions from "@/components/TheSuggestions.vue";
+import TheUserTypeSelection from "@/components/TheUserTypeSelection.vue";
+import { store } from "@/states";
 </script>
 
 <template>
@@ -10,11 +12,22 @@ import TheSuggestions from "./components/TheSuggestions.vue";
         <h1>TARDIS AI Chatbot</h1>
         <h2>Powered by COLTS</h2>
       </div>
+      <TheUserTypeSelection></TheUserTypeSelection>
       <TheQuestionInput></TheQuestionInput>
       <TheSuggestions></TheSuggestions>
     </div>
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectedRole: "beginner",
+    };
+  },
+};
+</script>
 
 <style lang="scss">
 @import "@/assets/styles/reset.scss";
@@ -51,7 +64,7 @@ main {
 }
 .container {
   padding: 0 2.4rem;
-  width: clamp(50rem, 80rem, 100rem);
+  width: clamp(50rem, 90rem, 100rem);
   margin: 0 auto;
 }
 </style>
