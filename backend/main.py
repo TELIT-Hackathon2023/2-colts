@@ -57,6 +57,7 @@ def test():
         data = request.args.get('data')
         data += " Explain this to a "
         persona = request.args.get('persona')
+        print("persona", persona)
         def switch(persona):
             if persona == 0:
                 data += "beginner"
@@ -65,17 +66,17 @@ def test():
             elif persona == 2:
                 data += "business analyst"
         print("request arguments: ", data)
-        if data:
-            response = chain({"question": data, "chat_history": chat_history})
-            if response:
-                print("AI response: ", response)
-                chat_history.append((data, response['answer']))
-                data = None
-                return jsonify({'status': 'success', 'data': response}), 200
-            else:
-                return jsonify({'status': 'error', 'message': 'Could not fetch response from AI'}), 400
-        else:
-            return "sicko ok", 200
+        # if data:
+        #     response = chain({"question": data, "chat_history": chat_history})
+        #     if response:
+        #         print("AI response: ", response)
+        #         chat_history.append((data, response['answer']))
+        #         data = None
+        #         return jsonify({'status': 'success', 'data': response}), 200
+        #     else:
+        #         return jsonify({'status': 'error', 'message': 'Could not fetch response from AI'}), 400
+        # else:
+        return "sicko ok", 200
 
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
