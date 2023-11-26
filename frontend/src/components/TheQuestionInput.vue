@@ -10,8 +10,12 @@ import axios from "axios";
         v-model="inputText"
         placeholder="Write your question "
       />
-      <ButtonLink @click="getAnswer" :type="'secondary'"
-        ><svg
+      <ButtonLink
+        @click="$emit('questionSubmitted', inputText)"
+        :type="'secondary'"
+      >
+        <svg
+          v-if="!isResponseLoading"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -23,6 +27,21 @@ import axios from "axios";
             stroke-linecap="round"
             stroke-linejoin="round"
             d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+          />
+        </svg>
+        <svg
+          v-else
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 icon spin"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
           />
         </svg>
       </ButtonLink>
@@ -37,20 +56,8 @@ export default {
       inputText: "",
     };
   },
-  methods: {
-    async getAnswer() {
-      // axios request
-      try {
-        const response = await axios.get("http://localhost:8080/test", {
-          params: {
-            data: this.inputText,
-          },
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    },
+  props: {
+    isResponseLoading: Boolean,
   },
 };
 </script>
@@ -101,5 +108,19 @@ section {
     outline: 2px solid $pink;
     outline-offset: 4px;
   }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply the animation to the icon with a delay between spins */
+.spin {
+  display: inline-block;
+  animation: spin 2s linear infinite; /* 4s duration, linear timing, infinite repetition */
 }
 </style>

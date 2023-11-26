@@ -8,6 +8,7 @@ import { store } from "@/states.js";
         v-for="(card, index) in cards"
         :key="index"
         class="suggestions__card"
+        @click="$emit('suggestedPromptSubmitted', card.content)"
       >
         <h3>
           {{ card.title }}
@@ -62,17 +63,16 @@ export default {
         case "business analyst":
           return [
             {
-              title: "Exposing an API",
-              content: "How exactly can I create a team in Mission Control?",
+              title: "Migration",
+              content: "How can I migrate my applications from caas to cetus?",
             },
             {
-              title: "Circuit breaker",
-              content: "Does Tardis provide a circuit breaker functionality?",
+              title: "Roles",
+              content: "Is there some role management in TARDIS?",
             },
             {
-              title: "CloudWalker",
-              content:
-                "How can I configure recipient client to expose multiple filetypes?",
+              title: "Businness",
+              content: "How can our firm use cloudwalker?",
             },
           ];
           break;
@@ -83,14 +83,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/styles/abstracts.scss";
+@import "@/assets/styles/queries.scss";
 
 .suggestions {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 2.4rem;
-
+  @include media("<=606px") {
+    grid-template-columns: auto auto;
+    gap: 1.2rem;
+  }
   &__card {
     background-color: $grey;
+    min-height: 15rem;
+
     padding: 1.6rem;
     border-radius: $border-radius-small;
     transition: all 150ms ease-out;
